@@ -1,0 +1,59 @@
+
+11 Jun 2017:
+Updated analyze_xs to be able to load Zeiss *.czi files as well as *.lsm files (the original default). As part of this update, the metadata structures, lsminf1 and lsminf2, were reconfigured to accept the metadata from the *.czi reader, and the metadata structure lsminf1 has become obsolete (all pertinent information is now in lsminf2).
+
+Also as part of this, if you want to be able to use czi files, it is necessary to download the bioformats toolbox from openmicroscopy.org (see the following link, which may potentially become outdated:
+https://www.openmicroscopy.org/site/support/bio-formats5.5/users/matlab/index.html)
+and unzip those files into a folder in your matlab path. As detailed on the website, it may become necessary to increase the memory of java heapspace.  See the openmicroscopy.org website for details.
+
+I added the function "openczi" to run the bio-formats czi reader, and then tailor the output to mesh into analyze_xs.
+
+NOTE: the use of czi files is in beta.
+
+run_analyze_xs: 
+Updated the "catch" block to the recommended use of error data. Added a line to print to the screen more information about the error:
+fprintf('%s in %s\n',LE{end}.message,filename)
+
+Also changed readdir to readdir2, which, among other things, can deal with spaces in the filenames.
+
+analyze_xs:
+made it so 16 bit images are fine.  Lines 239, 242, 243
+
+fit_peaks:
+changing so that exporting images to the folder ./Fittedpeaksimages is default, and filename is included so the path's last folder can be included as part of the filename. If the directory ./Fittedpeaksimages does not exist, it will be created.
+
+
+
+
+26 Dec 2016
+Edited the help header of "run_analyze_xs" to be accurate and include varargin as a listed argument.
+
+23 Dec 2016
+Switched "H" and "W" on lines 65 and 66 of "intronicintensity".  Also made intr_pad an input argument (optional) with default value of 2 (which was previously the forced value).
+
+25 Jul 2013
+Added "alignByHand" to the list of functions under "Methods".  It is not fully integrated into the pipeline process.
+
+17 Jul 2013
+Added functionality to "analyze_xs" to alter the parameter "ns" found in "domainMeas"
+In line with this, updated "run_analyze_xs" to include the varargin input.
+Updated needed to "generate_canonical" to align with non-standard "ns".
+
+7 Jun 2013
+Updated "fit_peaks" code.
+
+29 Oct 2012
+"repeat_remove", "isrowvec", and "repeatcheck" added to the "Functions" folder
+Changed protocol so that all profiles, including those from nuclear proteins, need a canonical profile 
+Now only "dl" is fit to a gaussian.
+There is code to help you generate your own canonical profile.
+(these here were included in the original submission after reviewers comments).
+
+4 Jun 2012
+Updated "unroll2" code somehow.
+
+prior to 22 May 2013
+Fixed bug in "plot_embryo" that prevented plots being made when there is a non-processed, "5" channel.
+Added functionality to "fit_peaks" that allowed for more than one intronic probe channel.
+
+
